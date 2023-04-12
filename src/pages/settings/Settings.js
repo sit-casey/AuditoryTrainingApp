@@ -11,8 +11,7 @@ import { ThemeContext } from "../../App";
 import ReactSwitch from "react-switch";
 
 function Settings() {
-  //
-
+  ////////// Code to change the email and the password of the user//////////
   const emailRef = useRef();
   const currentPasswordRef = useRef();
   const newPasswordRef = useRef();
