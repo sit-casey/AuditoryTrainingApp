@@ -24,108 +24,139 @@ import IdentificationForum from "./pages/forum/IdentificationForum";
 import MyProfilePage from "./pages/myProfile/MyProfilePage";
 import Settings from "./pages/settings/Settings";
 
+export const ThemeContext = createContext(null);
+
 function App() {
   const authContext = useContext(AuthContext);
 
-  return (
-    <Router>
-      <IdleTimerContainer />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/reset" element={<ResetPage />} />
-        <Route
-          path="/dashboard"
-          element={
-            authContext.isLoggedIn ? <DashboardPage /> : <Navigate to="/auth" />
-          }
-        />
-        <Route
-          path="/activity"
-          element={
-            authContext.isLoggedIn ? <ActivityPage /> : <Navigate to="/auth" />
-          }
-        />
-        <Route
-          path="/activity/detection"
-          element={
-            authContext.isLoggedIn ? (
-              <GamePageDetection />
-            ) : (
-              <Navigate to="/auth" />
-            )
-          }
-        />
-        <Route
-          path="/lingActivity/detection"
-          element={
-            authContext.isLoggedIn ? (
-              <LingDetectionPage />
-            ) : (
-              <Navigate to="/auth" />
-            )
-          }
-        />
-        <Route
-          path="/lingActivity/discrimination"
-          element={
-            authContext.isLoggedIn ? (
-              <LingDiscriminationPage />
-            ) : (
-              <Navigate to="/auth" />
-            )
-          }
-        />
-        <Route
-          path="/lingActivity/identification"
-          element={
-            authContext.isLoggedIn ? (
-              <LingIdentificationPage />
-            ) : (
-              <Navigate to="/auth" />
-            )
-          }
-        />
-        <Route
-          path="/lingActivity/identification2"
-          element={
-            authContext.isLoggedIn ? (
-              <LingIdentificationPage2 />
-            ) : (
-              <Navigate to="/auth" />
-            )
-          }
-        />
-        <Route
-          path="auth"
-          element={
-            !authContext.isLoggedIn ? (
-              <AuthPage />
-            ) : (
-              <Navigate to="/dashboard" />
-            )
-          }
-        />
-        <Route path="/DetectionForum" element={<DetectionForum />} />
-        <Route
-          path="/settings"
-          element={
-            authContext.isLoggedIn ? <Settings /> : <Navigate to="/auth" />
-          }
-        />
+  // Themes
+  const [theme, setTheme] = useState("light");
 
-        <Route path="*" element={<HomePage />} />
-        <Route path="/DiscriminationForum" element={<DiscriminationForum />} />
-        <Route path="*" element={<HomePage />} />
-        <Route path="/IdentificationForum" element={<IdentificationForum />} />
-        <Route
-          path="/myprofile"
-          element={
-            authContext.isLoggedIn ? <MyProfilePage /> : <Navigate to="/auth" />
-          }
-        />
-        <Route path="*" element={<HomePage />} />
-      </Routes>
-    </Router>
+  const toggleTheme = () => {
+    setTheme((curr) => (curr === "light" ? "dark" : "light"));
+  };
+
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      <div className="App" id={theme}>
+        <Router>
+          <IdleTimerContainer />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/reset" element={<ResetPage />} />
+            <Route
+              path="/dashboard"
+              element={
+                authContext.isLoggedIn ? (
+                  <DashboardPage />
+                ) : (
+                  <Navigate to="/auth" />
+                )
+              }
+            />
+            <Route
+              path="/activity"
+              element={
+                authContext.isLoggedIn ? (
+                  <ActivityPage />
+                ) : (
+                  <Navigate to="/auth" />
+                )
+              }
+            />
+            <Route
+              path="/activity/detection"
+              element={
+                authContext.isLoggedIn ? (
+                  <GamePageDetection />
+                ) : (
+                  <Navigate to="/auth" />
+                )
+              }
+            />
+            <Route
+              path="/lingActivity/detection"
+              element={
+                authContext.isLoggedIn ? (
+                  <LingDetectionPage />
+                ) : (
+                  <Navigate to="/auth" />
+                )
+              }
+            />
+            <Route
+              path="/lingActivity/discrimination"
+              element={
+                authContext.isLoggedIn ? (
+                  <LingDiscriminationPage />
+                ) : (
+                  <Navigate to="/auth" />
+                )
+              }
+            />
+            <Route
+              path="/lingActivity/identification"
+              element={
+                authContext.isLoggedIn ? (
+                  <LingIdentificationPage />
+                ) : (
+                  <Navigate to="/auth" />
+                )
+              }
+            />
+            <Route
+              path="/lingActivity/identification2"
+              element={
+                authContext.isLoggedIn ? (
+                  <LingIdentificationPage2 />
+                ) : (
+                  <Navigate to="/auth" />
+                )
+              }
+            />
+            <Route
+              path="auth"
+              element={
+                !authContext.isLoggedIn ? (
+                  <AuthPage />
+                ) : (
+                  <Navigate to="/dashboard" />
+                )
+              }
+            />
+            <Route path="/DetectionForum" element={<DetectionForum />} />
+            <Route
+              path="/settings"
+              element={
+                authContext.isLoggedIn ? <Settings /> : <Navigate to="/auth" />
+              }
+            />
+
+            <Route path="*" element={<HomePage />} />
+            <Route
+              path="/DiscriminationForum"
+              element={<DiscriminationForum />}
+            />
+            <Route path="*" element={<HomePage />} />
+            <Route
+              path="/IdentificationForum"
+              element={<IdentificationForum />}
+            />
+            <Route
+              path="/myprofile"
+              element={
+                authContext.isLoggedIn ? (
+                  <MyProfilePage />
+                ) : (
+                  <Navigate to="/auth" />
+                )
+              }
+            />
+            <Route path="*" element={<HomePage />} />
+          </Routes>
+        </Router>
+      </div>
+    </ThemeContext.Provider>
   );
 }
 
