@@ -3,7 +3,7 @@ import classes from "./settings.module.css";
 import { EmailAuthProvider } from "firebase/auth";
 import React, { useRef, useState, useContext } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
-import styled from "styled-components";
+//import styled from "styled-components";
 import { useAuth } from "../../../src/components/store/auth-context";
 import { Link, useNavigate } from "react-router-dom";
 import firebase from "firebase/compat/app";
